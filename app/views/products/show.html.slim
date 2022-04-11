@@ -1,0 +1,18 @@
+table
+  thead
+    tr
+      th
+        =@product.title
+        =image_tag @product.image.url(:medium)
+  tbody
+    tr
+      td
+        =@product.description
+      td
+        =@product.price
+      td
+        =@category.name
+
+
+= link_to 'Edit', edit_product_path(@product)
+= link_to 'Back', products_path

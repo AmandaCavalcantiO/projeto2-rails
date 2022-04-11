@@ -30,6 +30,9 @@
     <%= f.label :Categoria%><br>
     <%=collection_select(:product, :category_id, Category.all, :id, :name, prompt: true)%><br><br>
 
+    <%= f.label :Imagem%><br>
+    <%= f.file_field :image%>
+
   <div class="actions">
     <%= f.submit 'Confirmar'%>
   </div>

@@ -7,6 +7,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    set_category
   end
 
   def new
@@ -17,9 +18,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    binding.pry
     @product = Product.new(product_params)
-
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
@@ -53,12 +52,16 @@ class ProductsController < ApplicationController
   end
 
   private
+    def set_category
+      @category = Category.find(@product.category_id)
+    end
 
     def set_product
       @product = Product.find(params[:id])
     end
 
     def product_params
-      params.require(:product).permit(:title, :description, :price, :category_id, :user_id, :quantity, :image_name)
+      params[:product][:user_id] = current_user.id
+      params.require(:product).permit(:title, :description, :price, :category_id, :user_id, :quantity, :image_name, :image)
     end
 end
