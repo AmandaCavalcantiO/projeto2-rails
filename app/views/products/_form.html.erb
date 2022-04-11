@@ -1,0 +1,38 @@
+<div>
+<%= form_for(@product) do |f| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% @product.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+      <%binding.pry%>
+    </div>
+  <% end %>
+    <%= f.label :Título%><br>
+    <%= f.text_field :title%><br>
+
+    <%= f.label :Descrição%><br>
+    <%= f.text_area :description%><br>
+
+    <%= f.label :Preço%><br>
+    <%= f.text_field :price%><br>
+
+    <%= f.label :Quantidade %><br>
+    <%= f.text_field :quantity%><br>
+
+    <%= f.label :imagem%><br>
+    <%= f.text_field :image_name%><br>
+
+    <%= f.label :Categoria%><br>
+    <%=collection_select(:product, :category_id, Category.all, :id, :name, prompt: true)%><br><br>
+
+  <div class="actions">
+    <%= f.submit 'Confirmar'%>
+  </div>
+<% end %>
+
+</div>
