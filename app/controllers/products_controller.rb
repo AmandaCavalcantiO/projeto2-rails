@@ -3,7 +3,12 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
-    @products = Product.all
+    @categories = Category.all
+    if filter_params.present?
+      @products = Product.where(filter_params).order('created_at DESC').paginate(:page => params[:page], :per_page => 3)
+    else
+      @products = Product.paginate(:page => params[:page], :per_page => 3)
+    end
   end
 
   def show
@@ -11,10 +16,12 @@ class ProductsController < ApplicationController
   end
 
   def new
+    @categories = Category.all
     @product = Product.new
   end
 
   def edit
+    @categories = Category.all
   end
 
   def create
@@ -52,6 +59,9 @@ class ProductsController < ApplicationController
   end
 
   private
+    def filter_params
+      params.require(:filtro).permit(:category_id)
+    end
     def set_category
       @category = Category.find(@product.category_id)
     end
@@ -61,7 +71,8 @@ class ProductsController < ApplicationController
     end
 
     def product_params
+      binding.pry
       params[:product][:user_id] = current_user.id
-      params.require(:product).permit(:title, :description, :price, :category_id, :user_id, :quantity, :image_name, :image)
+      params.require(:product).permit(:title, :description, :price, :category_id, :user_id, :quantity, :image)
     end
 end

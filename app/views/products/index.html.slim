@@ -1,0 +1,40 @@
+h2
+  | Listing Products
+
+.category-button
+  = form_for :filtro, url: products_path, method: 'get' do |f|
+    = f.select :category_id, @categories.map{|c|[c.name, c.id]}
+    = f.submit
+
+
+
+  -@categories.each do |category|
+    =link_to category.name, products_path(filtro: category.id)
+
+
+
+section.d-flex
+  -@products.each do |product|
+    .product-card.card.shadow style="width: 300px; height:400px;"
+      .card-img style="height: 200px;"
+        - if product.image.present?
+          =image_tag product.image.url(:medium), style:"max-width: 200; height: 200px;"
+        - else
+          =image_tag "missing.jpeg", style:"width:200px; height: 200px;"
+
+      .card-body style="height: 200px"
+        .text-card style="height: 100px"
+          h5.card-title
+            =product.title
+          p.card-text
+            =product.price
+        .text-card style="height: 100px"
+          p.card-link
+            =link_to 'Show', product
+            =link_to 'Edit', edit_product_path(product)
+            =link_to 'Destroy', product, method: :delete, data: {confirm: 'Are you sure?'}
+
+.digg_pagination
+  .page_info
+    =page_entries_info @products
+  =will_paginate @posts, :container => false

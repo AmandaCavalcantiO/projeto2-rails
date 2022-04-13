@@ -1,0 +1,17 @@
+pt-BR:
+  aciverecord:
+    models:
+      product: 'produto'
+    attributes:
+        product:
+          title: 'título'
+  global:
+    forms:
+      submit: 'salvar'
+      title: 'título'
+
+  back: 'voltar'
+  edit: 'editar'
+  show: 'exibir'
+  product: 'produto'
+  submit: 'salvar'
