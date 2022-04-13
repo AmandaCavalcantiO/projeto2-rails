@@ -1,0 +1,18 @@
+
+- @products.each do |product|
+  .product-card.card.shadow style="width: 300px; height:400px;"
+    .card-img style="height: 200px;"
+      - if product.image.present?
+        =image_tag product.image.url(:medium), style:"max-width: 200; height: 200px;"
+      - else
+        =image_tag "missing.jpeg", style:"width:200px; height: 200px;"
+
+    .card-body style="height: 200px"
+      .text-card style="height: 100px"
+        h5.card-title
+          =product.title
+        p.card-text
+          =product.price
+      .text-card style="height: 100px"
+        p.card-link
+          =link_to 'Show', product

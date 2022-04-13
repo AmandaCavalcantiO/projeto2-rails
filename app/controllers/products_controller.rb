@@ -12,7 +12,6 @@ class ProductsController < ApplicationController
   end
 
   def show
-    set_category
   end
 
   def new
@@ -60,10 +59,7 @@ class ProductsController < ApplicationController
 
   private
     def filter_params
-      params.require(:filtro).permit(:category_id)
-    end
-    def set_category
-      @category = Category.find(@product.category_id)
+      params.require(:filtro).permit(:category_id) if params[:filtro].present?
     end
 
     def set_product
@@ -71,7 +67,6 @@ class ProductsController < ApplicationController
     end
 
     def product_params
-      binding.pry
       params[:product][:user_id] = current_user.id
       params.require(:product).permit(:title, :description, :price, :category_id, :user_id, :quantity, :image)
     end

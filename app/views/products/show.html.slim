@@ -1,4 +1,4 @@
-section
+section.d-flex style="flex-direction: column; align-items: center;"
   .product-image
     - if @product.image.exists?
       =image_tag @product.image.url(:medium)
@@ -9,11 +9,14 @@ section
     h4
       =@product.title
     p
+      |Descrição
       =@product.description
     p
+      |Preço
       =@product.price
     p
-      =@category.name
+      |Categoria
+      =@product.category.name
 
   .product-links
     =link_to 'Edit ', edit_product_path(@product)
