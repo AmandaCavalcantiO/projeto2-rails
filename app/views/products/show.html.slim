@@ -1,18 +1,21 @@
-table
-  thead
-    tr
-      th
-        =@product.title
-        =image_tag @product.image.url(:medium)
-  tbody
-    tr
-      td
-        =@product.description
-      td
-        =@product.price
-      td
-        =@category.name
+section
+  .product-image
+    - if @product.image.exists?
+      =image_tag @product.image.url(:medium)
+    -else
+      =image_tag "missing.jpeg", style:"width:300px; height: 300px;"
 
+  .product-body
+    h4
+      =@product.title
+    p
+      =@product.description
+    p
+      =@product.price
+    p
+      =@category.name
 
-= link_to 'Edit', edit_product_path(@product)
-= link_to 'Back', products_path
+  .product-links
+    =link_to 'Edit ', edit_product_path(@product)
+    | |
+    =link_to ' Back', products_path

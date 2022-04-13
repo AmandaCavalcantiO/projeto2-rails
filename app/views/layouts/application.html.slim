@@ -28,12 +28,18 @@ html
                 a.nav-link href="#{new_product_path}"
                   | Adicionar produto
               li.nav-item
+                a.nav-link href="#{new_category_path}"
+                  | Nova Categoria
+              li.nav-item
+                a.nav-link href="#{products_path}"
+                  | Todos os Produtos
+              li.nav-item
                 a.nav-link href="#{destroy_user_session_path}" data-method="delete"
                   span
-                    .material-icons-outlined-help
+                  .material-icons-outlined-help
                   | Sair
 
-    .container.vh-100.w-50.shadow
+    .general style="margin-left: 250px; width:950px;"
       p.notice
         = notice
       p.alert

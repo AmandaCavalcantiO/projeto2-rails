@@ -1,0 +1,12 @@
+= simple_form_for @product do |f|
+  = f.input :title
+  = f.input :description
+  = f.input :price
+  = f.input :quantity
+  = f.input :category_id, collection: Category.order(:name), label_method: :name, value_method: :id, include_blank: false, selected: @product.category_id
+  - if @product.image.exists?
+    =image_tag @product.image.url(:medium)
+  -else
+    =image_tag "missing.jpeg", style:"width:300px; height: 300px;"
+  = f.file_field :image
+  = f.button :submit
