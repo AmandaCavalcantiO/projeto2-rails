@@ -13,6 +13,19 @@
 h2{
   margin: 10px;
 }
+#products,{
+  display: flex;
+  justify-content: center;
+}
+#user_nav{
+  padding: 5px;
+  a, li{
+    margin: 5px;
+  }
+}
+#user-form{
+  padding: 0 50px 0 100px;
+}
 .digg_pagination {
   background: white;
   cursor: default;

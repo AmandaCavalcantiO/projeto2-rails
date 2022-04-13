@@ -10,36 +10,33 @@ html
     link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&display=swap" rel="stylesheet" /
     link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"
   body
-    nav.navbar.navbar-light.bg-light.shadow
-      -if current_user
-        button.navbar-toggler type="button" data-bs-toggle="collapse" data-bs-target="#side-navbar" aria-expanded="false" aria-controls="#side-navbar"
-          | =
-        i.fa-solid.fa-apple-whole
-    -if current_user
-      .collapse.collapse-horizontal.navbar-collapse.position-fixed#side-navbar.fs-5
-        .container.bg-dark.vh-100 style="width:100%;font-family: 'Heebo', sans-serif;"
-          nav.navbar-dark
-            ul.navbar-nav
-              li.nav-item
-                a.nav-link href="#{edit_user_registration_path}"
+    - if current_user
+        nav.navbar.navbar-expand-lg.navbar-dark.bg-dark#user_nav
+          ul.navbar-nav
+            li.nav-item.dropdown
+              a.nav-item.dropdown-toggle data-bs-toggle="dropdown" href="#"
+                - if current_user.avatar.present?
+                  =image_tag current_user.avatar.url(:medium), style:"width:40px; border-radius:360px; margin:5px"
+                - else
                   =image_tag "perfil.jpeg", style:"width:40px; border-radius:360px; margin:5px"
-                  | Perfil
-              li.nav-item
-                a.nav-link href="#{new_product_path}"
-                  | Adicionar produto
-              li.nav-item
-                a.nav-link href="#{new_category_path}"
+              .dropdown-menu
+                a.dropdown-item href="#{new_product_path}"
+                  | Novo produto
+                a.dropdown-item href="#{new_category_path}"
                   | Nova Categoria
-              li.nav-item
-                a.nav-link href="#{products_path}"
-                  | Todos os Produtos
-              li.nav-item
-                a.nav-link href="#{destroy_user_session_path}" data-method="delete"
-                  span
-                  .material-icons-outlined-help
+                a.dropdown-item href="#{edit_user_registration_path}"
+                  | Editar perfil
+                a.dropdown-item href="#{destroy_user_session_path}" data-method="delete"
                   | Sair
 
-    .general style="margin-left: 250px; width:950px;"
+            li.nav-item
+              a.nav-link href="#{products_path}"
+                | Produtos
+            li.nav-item
+              a.nav-link href="#{categories_path}"
+                | Categorias
+
+    .container#general
       p.notice
         = notice
       p.alert

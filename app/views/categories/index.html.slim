@@ -1,0 +1,17 @@
+section.d-flex#categories style="flex-direction: column; align-items: center;"
+  .div style= "margin:20px;"
+    h2
+    | Categorias
+  br
+  table
+    - @categories.each do |c|
+        tr
+          th
+            =c.name
+          td
+            .btn
+              =link_to 'produtos', products_path(filtro: {category_id: c.id})
+            .btn
+              =link_to 'editar', edit_category_path(c)
+            .btn
+              =link_to 'deletar', c, method: :delete, data: {confirm: 'Are you sure?'}
